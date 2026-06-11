@@ -1,0 +1,52 @@
+{
+  "last_ts": "1781186825.981739",
+  "processed_ids": [
+    "1781186825.981739",
+    "1781180748.115959"
+  ],
+  "last_bug_completed_at": "2026-06-11T14:13:51.653Z",
+  "processed_issue_ids": [
+    "APE-1575",
+    "APE-1988",
+    "APE-2146",
+    "RAT-2909",
+    "CAT-2039",
+    "PIG-456",
+    "CAT-1790"
+  ],
+  "csm_cache": {
+    "joe o'toole": { "slack_id": "U08LFD97FTJ", "email": "joe@rillet.com", "matched": true },
+    "ethan vaca": { "slack_id": "U091UAHCD8S", "email": "ethan@rillet.com", "matched": true },
+    "brandon blackwell": { "slack_id": "U0B01LGJ5PY", "email": "brandon.blackwell@rillet.com", "matched": true },
+    "joey kang": { "slack_id": "U0ACHD4K7V5", "email": "joey.kang@rillet.com", "matched": true },
+    "shannon hendricks": { "slack_id": "U0AJ5FAUJRJ", "email": "shannon.hendricks@rillet.com", "matched": true },
+    "kayla cameron": { "slack_id": "U0A8BCU1M7E", "email": "kayla.cameron@rillet.com", "matched": true },
+    "mishaal ahuja": { "slack_id": "U0B0HP0FU4R", "email": "mishaal.ahuja@rillet.com", "matched": true }
+  },
+  "customer_account_cache": {
+    "veed": { "sf_account_id": "001Uu00000HmkI8IAJ", "csm": "Joe O'Toole" },
+    "schemaapp": { "sf_account_id": "001Uu00000ToKKgIAN", "csm": "Joe O'Toole" },
+    "mercor ai": { "sf_account_id": "001Uu00000FBEa7IAH", "csm": "Joe O'Toole" },
+    "function health": { "sf_account_id": "001Uu00000SlbYiIAJ", "csm": "Joe O'Toole" },
+    "cast ai": { "sf_account_id": "001Uu00000ExBIlIAN", "csm": "Ethan Vaca" },
+    "juro": { "sf_account_id": "001Uu00000ARHJyIAP", "csm": "Ethan Vaca" },
+    "lokalise": { "sf_account_id": "001Uu00000U8bmsIAB", "csm": "Joey Kang" },
+    "neuralink": { "sf_account_id": "001Uu00000U95yWIAR", "csm": "Ethan Vaca" },
+    "endvr": { "sf_account_id": "001Uu00000NqjILIAZ", "csm": "Brandon Blackwell" },
+    "salesape": { "sf_account_id": "001Uu00000U8bmOIAR", "csm": "Brandon Blackwell" },
+    "crossbeam": { "sf_account_id": "0018a00001uNLdmAAG", "csm": "Brandon Blackwell" },
+    "prodly": { "sf_account_id": "001Uu00000IFEWYIA5", "csm": "Joey Kang" },
+    "modo energy": { "sf_account_id": "001Uu00000U8tMKIAZ", "csm": "Joey Kang" },
+    "fountain": { "sf_account_id": "001Uu00000Ma03GIAR", "csm": "Joey Kang" },
+    "capital markets gateway": { "sf_account_id": "001Uu00000RIfEsIAL", "csm": "Shannon Hendricks" },
+    "rasa": { "sf_account_id": "001Uu00000PKFNwIAP", "csm": "Shannon Hendricks" },
+    "etu": { "sf_account_id": "001Uu00000FB49LIAT", "csm": "Shannon Hendricks" },
+    "snapdocs": { "sf_account_id": "001Uu00000MA4vLIAT", "csm": "Mishaal Ahuja" },
+    "mirrorweb": { "sf_account_id": "001Uu00000TKDenIAH", "csm": "Mishaal Ahuja" },
+    "conexiom": { "sf_account_id": "001Uu00000RT68vIAD", "csm": null, "matched": false },
+    "total synergy": { "sf_account_id": "001Uu00000FB7LjIAL", "csm": null, "matched": false },
+    "rox": { "sf_account_id": "001Uu00000ReWWHIA3", "csm": null, "matched": false },
+    "hebbia": { "sf_account_id": "001Uu000009NBtvIAG", "csm": null, "matched": false },
+    "posh": { "sf_account_id": "001Uu00000U8bmEIAR", "csm": "Katie Erickson", "matched": true, "note": "two SF accounts named Posh; the Customer-Active one (001Uu00000U8bmEIAR, Primary CSM Katie Erickson) is the real customer — the other (001Uu000009JuKgIAK) is a Prospect" }
+  }
+}
