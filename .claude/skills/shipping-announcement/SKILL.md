@@ -89,7 +89,7 @@ Every draft must read like a CSM wrote it by hand. **Pick the guide by the item'
 > Full instructions: <docs link>
 
 **Feature voice rules (the shared DNA):**
-- Warm, personal greeting addressed to the customer ("Hi {Customer} team 👋"). Light, natural emoji — not corporate.
+- Warm, personal greeting addressed to the customer ("Hi {Customer} team"). **Emoji policy: reserve emoji for bigger / longer feature launches** (the rich-form Example B style). For a small/short ship, use **no emoji** (at most a single 👋 on the greeting). Never corporate.
 - Frame it as *their* request: "one of your feature requests", "a feature we know you've been waiting for".
 - Plain-language **benefit in second person** ("you can now…"), tied to what the *What* line says.
 - Optional short bullets only if the feature has a few concrete uses (mirror Example B). Otherwise keep it to Example A length.
@@ -104,7 +104,7 @@ Anchor on this real Kayla Cameron message to a customer contact after a fix ship
 > hey @adam — do you mind giving the date selection another go in the revenue section of the contract builder? team was able to push a fix and it looks to be toggling (selecting?) better on my side! 🤞
 
 **Bug-fix voice rules (the DNA of the example):**
-- **Casual and very short.** Usually ONE sentence, occasionally two. Lowercase "hey" is fine. Light emoji (🤞, 🙂) — at most one.
+- **Casual and very short.** Usually ONE sentence, occasionally two. Lowercase "hey" is fine. **No emoji by default for bug fixes** — they're routine resolutions, not launches, so drop the 🤞/🙂.
 - **Open with "hey {Customer} team —"** (e.g. "hey Niche team —"), matching the feature-side greeting. (The real example addressed one contact by name — "@adam" — but we default to the team greeting; the CSM can swap in an individual name before sending.)
 - **Frame it as "give X another go" / "mind retrying X?"** — invite the customer to *re-test*, rather than declaring "it's fixed." This is the signature move of the example.
 - **Reference the exact thing they reported, in plain words** (drawn from the ticket title/description) — e.g. "the date selection in the revenue section of the contract builder", not "the bug."

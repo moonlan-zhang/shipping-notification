@@ -1,18 +1,16 @@
 {
-  "last_ts": "1781186825.981739",
+  "last_ts": "1781203695.105019",
   "processed_ids": [
+    "1781180748.115959",
     "1781186825.981739",
-    "1781180748.115959"
+    "1781193271.543859",
+    "1781203695.105019"
   ],
-  "last_bug_completed_at": "2026-06-11T14:13:51.653Z",
+  "last_bug_completed_at": "2026-06-11T20:11:04.653Z",
   "processed_issue_ids": [
-    "APE-1575",
-    "APE-1988",
-    "APE-2146",
-    "RAT-2909",
-    "CAT-2039",
-    "PIG-456",
-    "CAT-1790"
+    "APE-1575", "APE-1988", "APE-2146", "RAT-2909", "CAT-2039", "PIG-456", "CAT-1790",
+    "RAT-2832", "RAT-2818", "ANT-1026", "ANT-1006", "APE-1977", "CAT-2010", "CAT-2069",
+    "CAT-2081", "CAT-2113", "FOX-637", "APE-2083", "CAT-2083", "PIG-337"
   ],
   "csm_cache": {
     "joe o'toole": { "slack_id": "U08LFD97FTJ", "email": "joe@rillet.com", "matched": true },
@@ -40,13 +38,17 @@
     "fountain": { "sf_account_id": "001Uu00000Ma03GIAR", "csm": "Joey Kang" },
     "capital markets gateway": { "sf_account_id": "001Uu00000RIfEsIAL", "csm": "Shannon Hendricks" },
     "rasa": { "sf_account_id": "001Uu00000PKFNwIAP", "csm": "Shannon Hendricks" },
+    "keelvar": { "sf_account_id": "001Uu00000U8bm4IAB", "csm": "Shannon Hendricks" },
+    "omni": { "sf_account_id": "0018a00001vwJtIAAU", "csm": "Kayla Cameron", "note": "Linear 'Omni' = SF 'Omni Analytics, Inc.'" },
+    "videa": { "sf_account_id": "001Uu00000ZfplaIAB", "csm": "Mishaal Ahuja", "note": "Linear 'Videa' = SF 'VideaHealth'" },
     "etu": { "sf_account_id": "001Uu00000FB49LIAT", "csm": "Shannon Hendricks" },
     "snapdocs": { "sf_account_id": "001Uu00000MA4vLIAT", "csm": "Mishaal Ahuja" },
     "mirrorweb": { "sf_account_id": "001Uu00000TKDenIAH", "csm": "Mishaal Ahuja" },
+    "qualio": { "sf_account_id": "001Uu00000UIPhpIAH", "csm": null, "matched": false, "note": "both New_*_CSM blank; Customer-Onboarding" },
     "conexiom": { "sf_account_id": "001Uu00000RT68vIAD", "csm": null, "matched": false },
     "total synergy": { "sf_account_id": "001Uu00000FB7LjIAL", "csm": null, "matched": false },
     "rox": { "sf_account_id": "001Uu00000ReWWHIA3", "csm": null, "matched": false },
     "hebbia": { "sf_account_id": "001Uu000009NBtvIAG", "csm": null, "matched": false },
-    "posh": { "sf_account_id": "001Uu00000U8bmEIAR", "csm": "Katie Erickson", "matched": true, "note": "two SF accounts named Posh; the Customer-Active one (001Uu00000U8bmEIAR, Primary CSM Katie Erickson) is the real customer — the other (001Uu000009JuKgIAK) is a Prospect" }
+    "posh": { "sf_account_id": "001Uu00000U8bmEIAR", "csm": "Katie Erickson", "matched": true, "note": "Customer-Active Posh (the Prospect one 001Uu000009JuKgIAK is different)" }
   }
 }
