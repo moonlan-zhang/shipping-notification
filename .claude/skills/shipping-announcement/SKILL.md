@@ -159,7 +159,7 @@ Each source produces zero or more **normalized announcement items** with this sh
 1. **Find newly-completed prod-support tickets.** Union two queries (then dedupe by identifier):
    - **By project:** `list_issues(project=PROD_SUPPORT_PROJECT_ID, state="completed", orderBy="updatedAt", limit 100)`.
    - **By urgency label:** for each label in `URGENCY_LABELS`, `list_issues(label="<Level N>", state="completed", orderBy="updatedAt", limit 50)`. (These catch prod-support tickets that live on a team board but outside the project — e.g. APE-872 was `Level 3` with no project.)
-2. **Recency + dedupe filter.** Keep a ticket only if `statusType="completed"` AND `completedAt` is within the last `BUG_LOOKBACK_DAYS` days AND its identifier is NOT in `processed_issue_ids`. (The lookback + watermark `last_bug_completed_at` make overlap safe; `processed_issue_ids` is the hard dedupe.)
+2. **Incremental filter (HARD — this prevents backlog blasts).** Act on a ticket ONLY if ALL of these hold: `statusType="completed"`; **`completedAt` is STRICTLY AFTER `last_bug_completed_at`** (the watermark — this is the PRIMARY inclusion gate); AND its identifier is NOT in `processed_issue_ids` (backstop). **⚠️ `BUG_LOOKBACK_DAYS` is ONLY a fetch bound** (so the queries don't scan all history) — it is **NEVER** the inclusion rule. Do NOT act on a ticket merely because it falls within the 7-day window: the vast majority of in-window tickets completed *before* the watermark and were already handled — they MUST be excluded. On a normal run this yields only the few tickets completed since the previous run (often zero). If `last_bug_completed_at` is "0"/missing, do NOT blast the whole window — treat it as "process only the last 24h" and flag for review.
 3. **Gather candidate customers (two sources, unioned).** `get_issue(id, includeCustomerNeeds:true)`, then collect from BOTH:
    - **(a) Ticket-level `customer_needs`** — each `customerNeeds[].customer.name`/`.id`. **Ticket-level ONLY — do NOT do the project union here** (unlike features): only customers who actually reported/hit the bug should be told. (e.g. APE-872 → Neuralink + Traba; RAT-2823 → Niche + ChartHop — both get a draft.)
    - **(b) The `Org Name:` line** parsed from the description (also `Org:` / a `## Summary` `Org Name:`). This catches bugs where the customer was named only in free text and never tagged as a customer_need (e.g. CAT-2055 titled "…— Bolt" had zero customer_needs). Mark any customer sourced this way as **"(via Org Name)"**.
@@ -200,32 +200,31 @@ The `New_Primary_CSM__c` / `New_Secondary_CSM__c` fields give a CSM **full name*
   (CSM users may show `IsActive=false` even when active in Slack — informational, not a blocker. If a name returns multiple User rows, mark unresolved/needs-attention — don't guess.)
 - **Email → Slack user:** check `csm_cache` first; else `slack_search_users` with the CSM's **email** (most reliable). Accept only an **unambiguous single match** on the Rillet workspace. Zero or multiple → mark unresolved, do NOT guess. Cache `{ slack_id, name, email }`.
 
-### 5. (shared) Draft the message (per customer, per item)
-For each (customer, item) where the customer resolved to a CSM, write ONE customer-facing draft using the **voice guide for that item's `source`**:
-- **`ship` → Feature-launch voice (A).** Greet the customer, announce `title` as their request, 1–2 sentence second-person benefit from `what_text`, optional bullets, docs link if present. 3–5 sentences.
-- **`bugfix` → Bug-fix voice (B).** Greet the customer, acknowledge the specific issue they raised (from `what_text`), state plainly it's resolved and what now works, optional "let us know it's working for you". 2–4 sentences, reassuring not celebratory.
-- Never invent capabilities/fixes beyond `what_text`.
+### 5. (shared) Draft the message — ONE per customer (merge all their items)
+Write **exactly ONE** customer-facing message per customer per run, covering **every item that customer has this run** — do NOT write a separate message per ticket. First group all qualifying items by customer; then:
+- **Single item:** use the voice guide for its `source` — `ship` → Feature-launch voice (A) (3–5 sentences); `bugfix` → Bug-fix voice (B) (2–4 sentences, casual/reassuring).
+- **Multiple bug fixes for the same customer:** ONE message that acknowledges them together, e.g. *"hey {Customer} team — we pushed fixes for a few things you'd flagged: <fix 1>, <fix 2>, <fix 3>. mind giving them a look?"* Keep the bug-fix voice; list each fix in plain language (from each item's `what_text`).
+- **A ship + bug fix(es) for the same customer:** still ONE message — lead with the feature (launch voice), then briefly note the fix(es).
+- Never invent capabilities/fixes beyond each item's `what_text`. The merged message must cover all items but stay tight.
 
 ### 6. (shared) Deliver to the Primary CSM
-Group all items' drafts **by CSM** (one CSM may cover several customers and/or both a ship and a bug). Assemble one DM per CSM. **Each item carries a `ref:` line** linking its source so the CSM can verify context — for ships: the matched Linear ticket(s) **and** the `#shipped` post permalink; for bugs: the Linear ticket. **These reference links go in the CSM-facing header only — NEVER inside the blockquote** (the blockquote is the verbatim text the customer sees; it must contain no internal Linear/#shipped links).
+Group by CSM → **one DM per CSM**, containing **one block per CUSTOMER** (each customer's single merged message from step 5 — never one block per ticket; a customer with 3 fixed tickets is ONE block).
+
+**MANDATORY `ref:` line on every block (never omit it):** list the Linear ticket link(s) for ALL of that customer's items this run, plus the `#shipped` post permalink if any item is a ship. Reference links go in the CSM-facing header ONLY — **NEVER inside the blockquote** (the blockquote is the verbatim customer text; it must contain no internal Linear/#shipped links).
 ```
 Here are draft announcements you can send to your customers:
 
-🚢 *New feature notification: <ship title>* — for <Customer(s)>            (ship blocks first)
-ref: <Linear ticket link(s), e.g. CAT-435> · <#shipped post permalink>
-*Customer:* <Customer Name>  →  <customer channel link, or ⚠ note if none>
+<🚢 and/or 🛠️> *<Customer Name>*  →  <customer channel link, or ⚠ note if none>
+ref: <ticket link 1> · <ticket link 2> · … · <#shipped post permalink if a ship>
 *Paste into that customer's channel:*
-> <the drafted launch message — NO internal links>
+> <the ONE merged message for this customer — covers all their items, NO internal links>
 
-🛠️ *Bug fixed: <bug title>* — for <Customer(s)>       (bug blocks)
-ref: <Linear ticket link, e.g. RAT-2823>
-*Customer:* <Customer Name>  →  <customer channel link, or ⚠ note if none>
-*Paste into that customer's channel:*
-> <the drafted fix message — NO internal links>
+…(one block per customer this CSM covers)…
 
-_(Edit to taste, then paste into the right customer channel — I won't post it for you.)_
+_(Edit to taste, then paste into each customer's channel — I won't post it for you.)_
 ```
-- Build the `#shipped` permalink from the post channel + ts: `https://team-rillet.slack.com/archives/<SHIPPED_CHANNEL_ID>/p<ts without the dot>`. Linear ticket links come straight from each issue's `url`.
+- Tag each block with 🚢 (has a ship), 🛠️ (has bug fix(es)), or both.
+- **The `ref:` line is REQUIRED on every block** — a draft missing its Linear ticket link is incomplete. Linear ticket links come straight from each issue's `url`. Build the `#shipped` permalink from the post channel + ts: `https://team-rillet.slack.com/archives/<SHIPPED_CHANNEL_ID>/p<ts without the dot>`.
 - **DRY-RUN (default):** print the full payload(s) to the user, grouped by CSM, each block labeled with its source, resolved Slack handle, and customer name(s). **Send nothing.**
 - **LIVE:** `slack_send_message` with `channel` = the CSM's **Slack user ID** (DMs accept a user ID as channel). One DM per CSM. Never send to a customer channel under any circumstances.
 - **Skipped (no CSM):** accounts with neither Secondary nor Primary CSM → skip silently (summary note only), never "needs attention".
