@@ -7,7 +7,7 @@
     "1781203695.105019",
     "1781227228.662059"
   ],
-  "last_bug_completed_at": "2026-06-12T18:11:04.265Z",
+  "last_bug_completed_at": "2026-06-12T20:15:21.498Z",
   "processed_issue_ids": [
     "APE-1575", "APE-1988", "APE-2146", "RAT-2909", "CAT-2039", "PIG-456", "CAT-1790",
     "RAT-2832", "RAT-2818", "ANT-1026", "ANT-1006", "APE-1977", "CAT-2010", "CAT-2069",
@@ -19,7 +19,8 @@
     "APE-2067", "CAT-2048", "CAT-2023", "APE-2145", "CAT-2055", "ANT-1034",
     "APE-2202", "FOX-654", "RAT-2880",
     "CAT-2103", "CAT-2088", "PIG-464",
-    "RAT-2759", "PIG-501"
+    "RAT-2759", "PIG-501",
+    "APE-2097", "CAT-2087"
   ],
   "csm_cache": {
     "joe o'toole": { "slack_id": "U08LFD97FTJ", "email": "joe@rillet.com", "matched": true },
@@ -62,6 +63,7 @@
     "posh": { "sf_account_id": "001Uu00000U8bmEIAR", "csm": "Katie Erickson", "matched": true, "note": "Customer-Active Posh (the Prospect one 001Uu000009JuKgIAK is different)" },
     "eve legal": { "sf_account_id": null, "csm": null, "matched": false, "note": "SF exact match returns 0 rows; 'Eve Legal AI' is Prospect — strict naming rule: not same entity" },
     "people data labs": { "sf_account_id": "001Uu00000R2yetIAB", "csm": null, "matched": false, "note": "Customer-Onboarding; both New_*_CSM blank — skipped by Type gate" },
-    "revv": { "sf_account_id": "001Uu00000GofA3IAJ", "csm": "Katie Erickson", "matched": true }
+    "revv": { "sf_account_id": "001Uu00000GofA3IAJ", "csm": "Katie Erickson", "matched": true },
+    "plasmidsaurus": { "sf_account_id": "001Uu00000U97PFIAZ", "csm": "Brandon Blackwell", "matched": true }
   }
 }
